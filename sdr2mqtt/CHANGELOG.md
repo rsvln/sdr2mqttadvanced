@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.4]
+- Nartis I100/I300/I500 meter with D101 display: rtl_433 built from rsvln/rtl_433 (nartis-d101),
+  nartis_chanmix channelizer, `nartis_serial` option, HA discovery for meter fields
+- Prebuilt images on ghcr.io (GitHub Actions), no build on the Home Assistant host
+- Protocol credits: Anton Viktorov (latonita)
+
 ## [0.1.24]
 - Pulling in latest RTL_433 changes
 
