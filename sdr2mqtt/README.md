@@ -1,14 +1,29 @@
-# Home Assistant Add-on: SDR2mqtt
+# Home Assistant Add-on: SDR2mqtt (Advanced)
 
 A Home Assistant addon for a software defined radio tuned to listen for RF transmissions from SDR/RTL Sensors and republish the data via MQTT.
+
+Fork of [thejeffreystone/hassio_addons](https://github.com/thejeffreystone/hassio_addons) with support for the
+**Nartis I100/I300/I500 electricity meter with D101 remote display** (433 MHz, AES-128-GCM):
+set `nartis_serial` to the 12 digit meter serial. rtl_433 is built from
+[rsvln/rtl_433](https://github.com/rsvln/rtl_433/tree/nartis-d101) (decoder `nartis_d101`), and `nartis_chanmix`
+feeds the 4 Nartis channels plus the regular 433.92 MHz band into one rtl_433 instance, so other sensors keep working.
+The meter only answers the display's requests, so keep the D101 powered (USB) for regular readings.
+
+### Credits
+
+The Nartis RF433 protocol (framing, channels, key derivation, AES-GCM nonce/AAD, DLMS exchange) was reverse engineered by
+**Anton Viktorov ([latonita](https://github.com/latonita))**:
+[esphome-nartis-rf-meter](https://github.com/latonita/esphome-nartis-rf-meter),
+[esphome-nartis-rf-2-meter](https://github.com/latonita/esphome-nartis-rf-2-meter),
+[nartis-rf433-v1-linux](https://github.com/latonita/nartis-rf433-v1-linux).
 
 ## Installation
 
 Add the repository URL under **Supervisor → Add-on store → ⋮ → Manage add-on repositories**:
 
-    https://github.com/thejeffreystone/hassio-addons
+    https://github.com/rsvln/sdr2mqttadvanced
 
-Then search for `SDR to home Assistant` and install it.
+Then search for `SDR to Home Assistant (Advanced)` and install it.
 
 ## Configuration
 
@@ -26,6 +41,7 @@ units: 'si'
 discovery_prefix: homeassistant
 discovery_interval: 600
 debug: false
+nartis_serial: '012345678901'   # optional, enables the Nartis meter
 ```
 
 ### Option: `mqtt_host`

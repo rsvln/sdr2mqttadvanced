@@ -1,23 +1,26 @@
 {
-  "name": "SDR to Home Assistant",
-  "version": "0.1.24",
-  "slug": "sdr2mqtt",
-  "description": "SDR/RTL Sensors to Home Assistant via MQTT with Autodiscovery",
-  "url": "https://github.com/thejeffreystone/hassio_addons",
-
+  "name": "SDR to Home Assistant (Advanced)",
+  "version": "0.2.3",
+  "slug": "sdr2mqttadvanced",
+  "description": "SDR/RTL Sensors to Home Assistant via MQTT, plus Nartis D101/I300 electricity meter",
+  "url": "https://github.com/rsvln/sdr2mqttadvanced",
+  "image": "ghcr.io/rsvln/{arch}-addon-sdr2mqttadvanced",
   "startup": "services",
-  "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
+  "arch": [
+    "aarch64",
+    "amd64",
+    "armv7"
+  ],
   "usb": true,
-  "options":
-    {
+  "options": {
     "mqtt_host": "192.168.1.100",
     "mqtt_port": 1883,
     "mqtt_user": "user",
     "mqtt_password": "pass",
     "mqtt_topic": "rtl_433",
-    "mqtt_retain" : "true",
-    "frequency" : "-f 433.92M",
-    "protocol" : "-R 40",
+    "mqtt_retain": "true",
+    "frequency": "-f 433.92M",
+    "protocol": "-R 40",
     "whitelist_enable": "false",
     "whitelist": "",
     "expire_after": 0,
@@ -25,17 +28,17 @@
     "discovery_prefix": "homeassistant",
     "discovery_interval": 600,
     "auto_discovery": "true",
-    "debug": "false"
+    "debug": "false",
+    "nartis_serial": ""
   },
-  "schema":
-    {
+  "schema": {
     "mqtt_host": "str",
     "mqtt_port": "int",
     "mqtt_user": "str",
     "mqtt_password": "str",
     "mqtt_topic": "str",
-    "mqtt_retain" : "str",
-    "frequency" : "str",
+    "mqtt_retain": "str",
+    "frequency": "str",
     "protocol": "str",
     "whitelist_enable": "bool",
     "whitelist": "str",
@@ -44,7 +47,7 @@
     "discovery_prefix": "str",
     "discovery_interval": "int",
     "auto_discovery": "bool",
-    "debug": "bool"
-   }
+    "debug": "bool",
+    "nartis_serial": "str?"
+  }
 }
-

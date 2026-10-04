@@ -569,6 +569,37 @@ mappings = {
 }
 
 
+# Electricity meter fields (Nartis D101/I300 decoder, model "Nartis-Meter")
+def _meter_mapping(key, suffix, name, device_class, unit, state_class="measurement"):
+    config = {
+        "state_class": state_class,
+        "name": name,
+        "unit_of_measurement": unit,
+        "value_template": "{{ value|float }}"
+    }
+    if device_class:
+        config["device_class"] = device_class
+    mappings[key] = {"device_type": "sensor", "object_suffix": suffix, "config": config}
+
+for _ph in ("L1", "L2", "L3"):
+    _meter_mapping("voltage_%s_V" % _ph, "U_%s" % _ph, "Voltage %s" % _ph, "voltage", "V")
+    _meter_mapping("current_%s_A" % _ph, "I_%s" % _ph, "Current %s" % _ph, "current", "A")
+    _meter_mapping("power_%s_W" % _ph, "P_%s" % _ph, "Power %s" % _ph, "power", "W")
+    _meter_mapping("reactive_power_%s_var" % _ph, "Q_%s" % _ph, "Reactive power %s" % _ph, "reactive_power", "var")
+for _pp in ("L1L2", "L2L3", "L3L1"):
+    _meter_mapping("voltage_%s_V" % _pp, "U_%s" % _pp, "Voltage %s" % _pp, "voltage", "V")
+_meter_mapping("current_N_A", "I_N", "Current N", "current", "A")
+_meter_mapping("reactive_power_var", "Q", "Reactive power", "reactive_power", "var")
+_meter_mapping("frequency_Hz", "freq_Hz", "Frequency", "frequency", "Hz")
+_meter_mapping("energy_kWh", "E_import", "Energy import", "energy", "kWh", "total_increasing")
+for _t in ("T1", "T2", "T3", "T4"):
+    _meter_mapping("energy_%s_kWh" % _t, "E_import_%s" % _t, "Energy import %s" % _t, "energy", "kWh", "total_increasing")
+_meter_mapping("energy_export_kWh", "E_export", "Energy export", "energy", "kWh", "total_increasing")
+_meter_mapping("energy_reactive_import_kvarh", "R_import", "Reactive energy import", "reactive_energy", "kvarh", "total_increasing")
+_meter_mapping("energy_reactive_export_kvarh", "R_export", "Reactive energy export", "reactive_energy", "kvarh", "total_increasing")
+_meter_mapping("energy_last_month_kWh", "E_last_month", "Energy import last month", "energy", "kWh", "total")
+
+
 def mqtt_connect(client, userdata, flags, rc):
     """Callback for MQTT connects."""
     print("MQTT connected: " + mqtt.connack_string(rc))
