@@ -5,7 +5,7 @@ name: Build sdr2mqttadvanced image
 
 on:
   push:
-    branches: [main]
+    branches: [nartis]
     paths:
       - "sdr2mqtt/**"
       - ".github/workflows/build-sdr2mqtt.yaml"

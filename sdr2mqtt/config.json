@@ -1,6 +1,6 @@
 {
   "name": "SDR to Home Assistant (Advanced)",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "slug": "sdr2mqttadvanced",
   "description": "SDR/RTL Sensors to Home Assistant via MQTT, plus Nartis D101/I300 electricity meter",
   "url": "https://github.com/rsvln/sdr2mqttadvanced",
